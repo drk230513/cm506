@@ -4,7 +4,7 @@
  *      *** Do not modify ! ***
  *
  * Project: 'blinky01' 
- * Target:  'NXP LPC4088' 
+ * Target:  'LPC4088' 
  */
 
 #ifndef RTE_COMPONENTS_H

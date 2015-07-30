@@ -1,5 +1,5 @@
 /*
- * @brief A program for the EA NXP LPC4088QSB to flash LED1 and LED3.
+ * @brief A program for the EA NXP LPC4088QSB to flash LED1
  * @author David Kendall
  * @date July 2015
  */
@@ -7,29 +7,22 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define IOCON_P1_13 (*(volatile uint32_t *)(0x4002C0B4UL))
-#define IOCON_P1_18 (*(volatile uint32_t *)(0x4002C0C8UL))   
+#define IOCON_P1_18 (*(volatile uint32_t *)(0x4002C0C8UL))
 #define GPIOBASE   (0x20098000UL)
 #define GPIO1DIR   (*(volatile uint32_t *)(GPIOBASE + 0x020))
 #define GPIO1PIN   (*(volatile uint32_t *)(GPIOBASE + 0x034))
 
-
 #define LED1PIN    (1UL << 18)
-#define LED3PIN    (1UL << 13)
 
 void delay(uint32_t ms);
 
 int main() {
-	IOCON_P1_13 = 0;
-	IOCON_P1_18 = 0;
-	GPIO1DIR |= LED1PIN;
-	GPIO1DIR |= LED3PIN;
+	IOCON_P1_18 = 0;        // connect P1_18 as ordinary GPIO pin
+	GPIO1DIR |= LED1PIN;    // set P1_18 as output pin
 	while (true) {
-		GPIO1PIN |= LED1PIN;
-		GPIO1PIN |= LED3PIN;
+		GPIO1PIN |= LED1PIN;  // set pin HIGH
 		delay(1000);
-		GPIO1PIN &= ~LED1PIN;
-	  GPIO1PIN &= ~LED3PIN;
+		GPIO1PIN &= ~LED1PIN; // set pin LOW
 		delay(1000);
 	}
 }
