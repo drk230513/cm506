@@ -24,9 +24,7 @@ int main() {
 	IOCON_P1_18 = 0;
 	GPIO1DIR |= (LED1PIN | LED3PIN);
 	while (true) {
-		GPIO1PIN |= (LED1PIN | LED3PIN);
-		delay(1000);
-		GPIO1PIN &= ~(LED1PIN | LED3PIN);
+		GPIO1PIN ^= (LED1PIN | LED3PIN);
 		delay(1000);
 	}
 }
