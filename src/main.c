@@ -14,10 +14,16 @@
 #define GPIOBASE   (0x20098000UL)
 #define GPIO0DIR   (*(volatile uint32_t *)(GPIOBASE + 0x000))
 #define GPIO0PIN   (*(volatile uint32_t *)(GPIOBASE + 0x014))
+#define GPIO0SET   (*(volatile uint32_t *)(GPIOBASE + 0x018))
+#define GPIO0CLR   (*(volatile uint32_t *)(GPIOBASE + 0x01c))
 #define GPIO1DIR   (*(volatile uint32_t *)(GPIOBASE + 0x020))
 #define GPIO1PIN   (*(volatile uint32_t *)(GPIOBASE + 0x034))
+#define GPIO1SET   (*(volatile uint32_t *)(GPIOBASE + 0x038))
+#define GPIO1CLR   (*(volatile uint32_t *)(GPIOBASE + 0x03c))
 #define GPIO2DIR   (*(volatile uint32_t *)(GPIOBASE + 0x040))
 #define GPIO2PIN   (*(volatile uint32_t *)(GPIOBASE + 0x054))
+#define GPIO2SET   (*(volatile uint32_t *)(GPIOBASE + 0x058))
+#define GPIO2CLR   (*(volatile uint32_t *)(GPIOBASE + 0x05c))
 
 
 #define LED1PIN    (1UL << 18)
@@ -37,10 +43,15 @@ int main() {
 	GPIO1DIR |= LED3PIN;
 	GPIO2DIR |= LED4PIN;
 	while (true) {
-		GPIO1PIN ^= LED1PIN;
-		GPIO0PIN ^= LED2PIN;
-		GPIO1PIN ^= LED3PIN;
-		GPIO2PIN ^= LED4PIN;
+		GPIO1SET = LED1PIN;
+		GPIO0SET = LED2PIN;
+		GPIO1SET = LED3PIN;
+		GPIO2SET = LED4PIN;
+		delay(1000);
+		GPIO1CLR = LED1PIN;
+		GPIO0CLR = LED2PIN;
+		GPIO1CLR = LED3PIN;
+		GPIO2CLR = LED4PIN;
 		delay(1000);
 	}
 }
