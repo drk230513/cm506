@@ -17,7 +17,7 @@
 void delay(uint32_t ms);
 
 int main() {
-	IOCON_P1_18 = 0;        // connect P1_18 as ordinary GPIO pin
+	IOCON_P1_18 &= ~0x1FUL; // GPIO pin, no resistor enabled
 	GPIO1DIR |= LED1PIN;    // set P1_18 as output pin
 	while (true) {
 		GPIO1PIN |= LED1PIN;  // set pin HIGH
