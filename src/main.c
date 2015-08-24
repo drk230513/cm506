@@ -20,8 +20,8 @@
 void delay(uint32_t ms);
 
 int main() {
-	IOCON_P1_13 &= ~0x3FUL;
-	IOCON_P1_18 &= ~0x3FUL;
+	IOCON_P1_13 = 0UL;
+	IOCON_P1_18 = 0UL;
 	GPIO1DIR |= LED1PIN;
 	GPIO1DIR |= LED3PIN;
 	while (true) {
