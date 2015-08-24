@@ -18,31 +18,17 @@
 #define LED3PIN    (1UL << 13)
 
 void delay(uint32_t ms);
-void skip(void);
 
 int main() {
-	IOCON_P1_13 &= ~0x1FUL;
-	IOCON_P1_18 &= ~0x1FUL;
+	IOCON_P1_13 &= ~0x3FUL;
+	IOCON_P1_18 &= ~0x3FUL;
 	GPIO1DIR |= LED1PIN;
 	GPIO1DIR |= LED3PIN;
 	while (true) {
-		/*
-		 * There's a puzzling bug here. LED1 remains on constantly.
-		 * It should not. It does not when the program is stepped in
-		 * the debugger. The bug disappears if you use a single write 
-		 * to the pin, i.e. GPIO1PIN |= (LED1PIN | LED3PIN) and
-		 * GPIO1PIN &= ~(LED1PIN | LED3PIN). It disappears if you
-		 * insert a short delay between the writes, e.g. skip(). And it disappears
-		 * if you update the pin by using the SET and CLR registers.
-		 * So there's something about the timing of the consecutive writes 
-		 * that causes the problem but I don't understand what it is.
-		 */
 		GPIO1PIN |= LED1PIN;
-		// skip();
 		GPIO1PIN |= LED3PIN;
 		delay(1000);
 		GPIO1PIN &= ~LED1PIN;
-		// skip();
 	  GPIO1PIN &= ~LED3PIN;
 		delay(1000);
 	}
@@ -70,8 +56,4 @@ void delay(uint32_t ms) {
 	}	
 }
 
-void skip(void) {
-	volatile uint32_t i = 0;
-	i = 1;
-}
 
