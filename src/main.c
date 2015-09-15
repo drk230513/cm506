@@ -58,11 +58,6 @@ int main() {
 	GPIO1DIR |= LEDGPIN;
 	GPIO1DIR |= LEDBPIN;
 	while (true) {
-		GPIO1CLR = LED1PIN;
-		GPIO0CLR = LED2PIN;
-		GPIO1SET = LED3PIN;
-		GPIO2SET = LED4PIN;
-		delay(1000);
 		GPIO1SET = LED1PIN;
 		GPIO0SET = LED2PIN;
 		GPIO1CLR = LED3PIN;
@@ -93,6 +88,11 @@ int main() {
 				break;
 			}
 		}
+		delay(1000);
+		GPIO1CLR = LED1PIN;
+		GPIO0CLR = LED2PIN;
+		GPIO1SET = LED3PIN;
+		GPIO2SET = LED4PIN;
 		delay(1000);
 	}
 }
