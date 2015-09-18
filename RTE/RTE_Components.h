@@ -3,8 +3,8 @@
  * Auto generated Run-Time-Environment Component Configuration File
  *      *** Do not modify ! ***
  *
- * Project: 'blinky01' 
- * Target:  'LPC4088' 
+ * Project: 'blinky' 
+ * Target:  'NXP LPC4088' 
  */
 
 #ifndef RTE_COMPONENTS_H
